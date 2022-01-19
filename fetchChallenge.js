@@ -3,7 +3,7 @@ const superagent = require('superagent');
 const fs = require('fs');
 const numberOfChallenge = 10;
 
-const config = require('./config.json');
+const config = require('./config');
 
 var TurndownService = require('turndown');
 
@@ -20,6 +20,7 @@ agent.post(urlLogin)
     }) // sends a JSON post body
     .set('Content-Type', 'application/x-www-form-urlencoded')
     .set('Cookie', 'PHPSESSID=38d6a5748f7e08ddb0c94bd76d84649f')
+    // Above is the default session ID when using a fresh private window
     .end((err, res) => {
         // Calling the end function will send the request
         console.log("logged");
