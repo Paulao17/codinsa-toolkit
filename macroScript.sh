@@ -6,6 +6,7 @@
 # - The archive directory 
 
 # Check if parameters are correct
+[ ! $1 ] && echo Missing file argument && exit 1
 [ ! -f $1 ] && echo First argument is not a file. && exit 1
 [ ! $CODINSA_ROOTDIR ] || [ ! -d $CODINSA_ROOTDIR ] && echo Root directory is not specified in CODINSA_ROOTDIR && exit 1
 
