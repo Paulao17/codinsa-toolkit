@@ -9,8 +9,8 @@ var TurndownService = require('turndown');
 
 var td = new TurndownService();
 
-const urlLogin = "https://codinsa.org/user/signin/check";
-const urlQualif = "https://codinsa.org/qualifications";
+const urlLogin = "https://training.codinsa.org/user/signin/check";
+const urlQualif = "https://training.codinsa.org/qualifications";
 
 const agent = superagent.agent();
 agent.post(urlLogin)
@@ -31,9 +31,14 @@ agent.post(urlLogin)
                 let first_td = $(el).children('td')[0];
                 let a = $(first_td).children('a');
                 let href = $(a).attr("href");
-                let dossier = $(a).text().replaceAll(' ', '_').replaceAll('.', '');
+                let dossier = $(a).text()
+                  .replaceAll(' ', '_')
+                  .replaceAll('.', '')
+                  .replaceAll('/', '')
+                  .replaceAll('(', '')
+                  .replaceAll(')', '');
                 fs.mkdir(__dirname + '/' + dossier, (err) => {
-                    if (err) throw err;
+                    if (err && err.code != 'EEXIST') throw err;
                     console.log("Created dossier " + dossier);
                 });
 
@@ -71,7 +76,7 @@ agent.post(urlLogin)
                             console.log("\tInput " + i + " added");
                         })
                     });
-                });
+                }).catch(err => console.log(`Failed to fetch ${href} : ${err}`));
             });
         });
         console.log("Loading Files...");
