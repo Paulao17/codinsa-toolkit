@@ -33,10 +33,27 @@ done < $1 > $CODINSA_ROOTDIR/target/target.js
 # Copy file to archive dir. Date file
 cp $CODINSA_ROOTDIR/target/target.js $CODINSA_ROOTDIR/archives/target-`date --iso-8601=seconds`.js || echo archive cp failed
 
-# Copy file to "latest" directory (for easy access)
-
-
 # Plug tests on stdin, compare stdout with expected results
+# Tbh this doesn't look very nice
+echo Plugged
+cat `dirname $1`/input0.txt
+echo
+echo into $1 and got
+cat `dirname $1`/input0.txt | node $CODINSA_ROOTDIR/target/target.js
+echo
+echo Expected
+cat `dirname $1`/input1.txt
+echo
+echo # separate runs
+echo Plugged
+cat `dirname $1`/input2.txt
+echo
+echo into $1 and got
+cat `dirname $1`/input2.txt | node $CODINSA_ROOTDIR/target/target.js
+echo
+echo Expected
+cat `dirname $1`/input3.txt
+echo
 
 exit 0
 
