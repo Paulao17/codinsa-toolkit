@@ -26,7 +26,7 @@ while read line; do
 	if [[ "${line:0:1}" = ">" ]] ;then  # If line starts with injection symbol, then inject.
 		[ -f $CODINSA_ROOTDIR/lib/${line:1}.js ] && cat $CODINSA_ROOTDIR/lib/${line:1}.js 
 	else
-		echo $line  # output rest of the file
+		echo "$line"  # output rest of the file
 	fi
 done < $1 > $CODINSA_ROOTDIR/target/target.js
 
