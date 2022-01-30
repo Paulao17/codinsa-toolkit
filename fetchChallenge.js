@@ -46,6 +46,11 @@ agent.post(urlLogin)
                 agent.get(href).then((res) => {
                     let $2 = cheerio.load(res.text);
 
+                    fs.appendFile(__dirname + '/' + dossier + "/id.txt", href.split('question/')[1], (err) => {
+                        if (err) throw err;
+                        console.log("\tAdded exercise ID");
+                    })
+
                     fs.copyFile(__dirname + '/templateChallenge/template.js', __dirname + '/' + dossier + '/template.js', (err) => {
                         if (err) throw err;
                         console.log('\nDossier : ' + dossier + '\n\tAdded template.js');
