@@ -9,8 +9,8 @@ var TurndownService = require('turndown');
 
 var td = new TurndownService();
 
-const urlLogin = "https://training.codinsa.org/user/signin/check";
-const urlQualif = "https://training.codinsa.org/qualifications";
+const urlLogin = "https://codinsa.org/user/signin/check";
+const urlQualif = "https://codinsa.org/qualifications";
 
 const agent = superagent.agent();
 agent.post(urlLogin)
